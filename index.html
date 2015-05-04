@@ -5,6 +5,10 @@
     <script src="d3/d3.js" charset="utf-8"></script>
 </head>
 <body>
-    <script src="csv-data-visualization.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        d3.text("pre_assessment.csv", function(data) {
+            console.log(data);
+        });
+    </script>
 </body>
 </html>

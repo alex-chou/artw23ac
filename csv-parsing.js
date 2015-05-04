@@ -1,7 +1,7 @@
 d3.csv("pre_assessment.csv", function(data) {
-    var parsedData = d3.csv.parseRows(data);
-    for (i = 0; i < parsedData.length; i++) {
-      console.log("hi");
-      console.log(parsedData[i]);
-    }
+  for (i = 0; i < data.length; i++) {
+    console.log(data[i]);
+  }
+  var parsedData = d3.csv.parseRows(data);
+  console.log(parsedData);
 });

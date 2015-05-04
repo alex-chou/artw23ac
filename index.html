@@ -6,8 +6,10 @@
     <script src="csv-parsing.js" charset="utf-8"></script>
 </head>
 <body>
-    <script type="text/javascript">
-        parseCSV("pre_assessment.csv");
-    </script>
+    <select name="Select CSV" onchange="parseCSV(this.value)">
+        <option value="">Please select</option>
+        <option value="pre_assessment.csv">Pre-Assessment Data</option>
+        <option value="post_assessment.csv">Post-Assessment Data</option>
+    </select>
 </body>
 </html>

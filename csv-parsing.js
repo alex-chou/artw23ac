@@ -1,4 +1,4 @@
-parseCSV = function(csvPath) {
+function parseCSV(csvPath) {
   d3.csv(csvPath, function(data) {
     var keys = Object.keys(data[0]);
     keys.forEach(function(k) {

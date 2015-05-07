@@ -1,9 +1,15 @@
+params = ["Country", "City", "Region", "Postal", "City Name", "State", "Grade", "Gender", "Ethnicity", "Score"];
+
 function loadVisual() {
   d3.csv("pre_assessment.csv", function(rawData) {
-    createGraph("City", "left", extractData(rawData, "City"));
+    params.forEach(function(p) {
+      createGraph(p, "left", extractData(rawData, p));
+    });
   });
   d3.csv("post_assessment.csv", function(rawData) {
-    createGraph("City", "right", extractData(rawData, "City"));
+    params.forEach(function(p) {
+      createGraph(p, "right", extractData(rawData, p));
+    });
   });
 }
 
@@ -20,20 +26,20 @@ function extractData(data, parameter) {
     }
   });
   return counts.sort(function(a, b) {
-  if (a.label < b.label) {
-    return -1;
-  } else if (a.label > b.label) {
-    return 1;
-  } else {
-    return 0;
-  }
-});
+          if (a.label < b.label) {
+            return -1;
+          } else if (a.label > b.label) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
 }
 
 /* Code taken from https://gist.github.com/enjalot/1203641
  * Has some slight modifications to the ratios and removed legend */
 function createGraph(title, side, data) {
-  var w = $(window).width() / 3, h = w, r = w / 3, inner = r / 3, color = d3.scale.category20c();
+  var w = $(window).width() / 2, h = w, r = w / 3, inner = r / 3, color = d3.scale.category20c();
   var total = d3.sum(data, function(d) {
       return d3.sum(d3.values(d));
   });

@@ -79,7 +79,7 @@ function createBar(title, side, data) {
               .attr("width", w + margin.left + margin.right)
               .attr("height", h + margin.top + margin.bottom)
               .append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-  var avg = d3.mean(data, function(d) {
+  var avg = d3.mean(data.map, function(d) {
       return d3.mean(d3.values(d));
   });
 
@@ -89,7 +89,7 @@ function createBar(title, side, data) {
   svg.append("text").attr("x", w / 2).attr("y", - margin.top / 2).attr("text-anchor", "middle")
                     .style("text-decoration", "underline").style("font-size", "16px").text(title);
   svg.append("text").attr("x", w / 2).attr("y", - margin.top / 4).attr("text-anchor", "middle")
-                    .style("text-decoration", "none").style("font-size", "16px").text(avg);
+                    .style("text-decoration", "none").style("font-size", "16px").text("Average: " + avg);
   svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + h + ")").call(xAxis);
   svg.append("g").attr("class", "y axis").call(yAxis);
 

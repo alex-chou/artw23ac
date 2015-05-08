@@ -88,8 +88,8 @@ function createBar(title, side, data) {
 
   svg.append("text").attr("x", w / 2).attr("y", - margin.top / 2).attr("text-anchor", "middle")
                     .style("text-decoration", "underline").style("font-size", "16px").text(title);
-  svg.append("text").attr("x", w / 2).attr("y", - margin.top / 3).attr("text-anchor", "middle")
-                    .style("text-decoration", "underline").style("font-size", "16px").text(avg);
+  svg.append("text").attr("x", w / 2).attr("y", - margin.top / 4).attr("text-anchor", "middle")
+                    .style("text-decoration").style("font-size", "16px").text(avg);
   svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + h + ")").call(xAxis);
   svg.append("g").attr("class", "y axis").call(yAxis);
 

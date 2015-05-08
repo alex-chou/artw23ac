@@ -2,11 +2,13 @@ pieParams = ["Country", "City", "Region", "Postal", "State", "Grade", "Gender", 
 barParamsPre = ["I make an effort to get along with my teammates.",
              "I am confident speaking in front of others.",
              "I think about the advantages and disadvantages of a choice before making a decision.",
-             "Score (Average: 42.21)"];
+             "Score",
+             "(Average: 42.21)"];
 barParamsPost = ["I make an effort to get along with my teammates.",
              "I am confident speaking in front of others.",
              "I think about the advantages and disadvantages of a choice before making a decision.",
-             "Score (Average: 64.49)"];
+             "Score",
+             "(Average: 64.49)"];
 
 function loadVisual() {
   d3.csv("pre_assessment.csv", function(rawData) {

@@ -80,7 +80,7 @@ function createBar(title, side, data) {
               .attr("height", h + margin.top + margin.bottom)
               .append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
   var avg = d3.mean(data, function(d) {
-      return d3.mean(d3.labels(d));
+      return d3.mean(d3.keys(d));
   });
 
   x.domain(data.map(function(d) { return d.label; }));

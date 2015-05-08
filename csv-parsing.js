@@ -79,8 +79,8 @@ function createBar(title, side, data) {
               .attr("width", w + margin.left + margin.right)
               .attr("height", h + margin.top + margin.bottom)
               .append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-  var avg = d3.mean(data.map, function(d) {
-      return d3.mean(d3.values(d));
+  var avg = d3.map.mean(data, function(d) {
+      return d3.map.mean(d3.values(d));
   });
 
   x.domain(data.map(function(d) { return d.label; }));

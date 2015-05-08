@@ -1,21 +1,15 @@
 pieParams = ["Country", "City", "Region", "Postal", "State", "Grade", "Gender", "Ethnicity"];
-barParamsPre = ["I make an effort to get along with my teammates.",
+barParams = ["I make an effort to get along with my teammates.",
              "I am confident speaking in front of others.",
              "I think about the advantages and disadvantages of a choice before making a decision.",
-             "Score",
-             "(Average: 42.21)"];
-barParamsPost = ["I make an effort to get along with my teammates.",
-             "I am confident speaking in front of others.",
-             "I think about the advantages and disadvantages of a choice before making a decision.",
-             "Score",
-             "(Average: 64.49)"];
+             "Score"];
 
 function loadVisual() {
   d3.csv("pre_assessment.csv", function(rawData) {
     pieParams.forEach(function(p) {
       createPie(p, "left", extractData(rawData, p).sort(compareLabel));
     });
-    barParamsPre.forEach(function(p) {
+    barParams.forEach(function(p) {
       createBar(p, "left", extractData(rawData, p).sort(compareLabelInt));
     });
   });
@@ -23,7 +17,7 @@ function loadVisual() {
     pieParams.forEach(function(p) {
       createPie(p, "right", extractData(rawData, p).sort(compareLabel));
     });
-    barParamsPost.forEach(function(p) {
+    barParams.forEach(function(p) {
       createBar(p, "right", extractData(rawData, p).sort(compareLabelInt));
     });
   });
@@ -85,12 +79,17 @@ function createBar(title, side, data) {
               .attr("width", w + margin.left + margin.right)
               .attr("height", h + margin.top + margin.bottom)
               .append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  var avg = d3.mean(data, function(d) {
+      return d3.mean(d3.values(d));
+  });
 
   x.domain(data.map(function(d) { return d.label; }));
   y.domain([0, d3.max(data, function(d) { return d.value; })]);
 
   svg.append("text").attr("x", w / 2).attr("y", - margin.top / 2).attr("text-anchor", "middle")
                     .style("text-decoration", "underline").style("font-size", "16px").text(title);
+  svg.append("text").attr("x", w / 2).attr("y", - margin.top / 2).attr("text-anchor", "middle")
+                    .style("text-decoration", "underline").style("font-size", "16px").text(avg);
   svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + h + ")").call(xAxis);
   svg.append("g").attr("class", "y axis").call(yAxis);
 

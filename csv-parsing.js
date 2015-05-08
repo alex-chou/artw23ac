@@ -79,9 +79,14 @@ function createBar(title, side, data) {
               .attr("width", w + margin.left + margin.right)
               .attr("height", h + margin.top + margin.bottom)
               .append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-  var avg = d3.mean(data, function(d) {
-      return parseInt(d3.values(d)[0]);
+  var sum = d3.sum(data, function(d) {
+      var values = d3.values(d);
+      return parseInt(values[0]) * values[1];
   });
+  var totalCount = d3.sum(data, function(d) {
+    return d3.values(d)[1];
+  });
+  var avg = sum / totalCount;
 
   x.domain(data.map(function(d) { return d.label; }));
   y.domain([0, d3.max(data, function(d) { return d.value; })]);

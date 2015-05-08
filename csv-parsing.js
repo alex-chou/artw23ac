@@ -1,15 +1,19 @@
 pieParams = ["Country", "City", "Region", "Postal", "State", "Grade", "Gender", "Ethnicity"];
-barParams = ["I make an effort to get along with my teammates.",
+barParamsPre = ["I make an effort to get along with my teammates.",
              "I am confident speaking in front of others.",
              "I think about the advantages and disadvantages of a choice before making a decision.",
-             "Score"];
+             "Score (Average: 42.21)"];
+barParamsPost = ["I make an effort to get along with my teammates.",
+             "I am confident speaking in front of others.",
+             "I think about the advantages and disadvantages of a choice before making a decision.",
+             "Score (Average: 64.49)"];
 
 function loadVisual() {
   d3.csv("pre_assessment.csv", function(rawData) {
     pieParams.forEach(function(p) {
       createPie(p, "left", extractData(rawData, p).sort(compareLabel));
     });
-    barParams.forEach(function(p) {
+    barParamsPre.forEach(function(p) {
       createBar(p, "left", extractData(rawData, p).sort(compareLabelInt));
     });
   });
@@ -17,7 +21,7 @@ function loadVisual() {
     pieParams.forEach(function(p) {
       createPie(p, "right", extractData(rawData, p).sort(compareLabel));
     });
-    barParams.forEach(function(p) {
+    barParamsPost.forEach(function(p) {
       createBar(p, "right", extractData(rawData, p).sort(compareLabelInt));
     });
   });

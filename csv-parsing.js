@@ -79,14 +79,34 @@ function createBar(title, side, data) {
               .attr("width", w + margin.left + margin.right)
               .attr("height", h + margin.top + margin.bottom)
               .append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  var sum = d3.sum(data, function(d) {
+      var values = d3.values(d);
+      return parseInt(values[0]) * values[1];
+  });
+  var totalCount = d3.sum(data, function(d) {
+    return d3.values(d)[1];
+  });
+  var avg = sum / totalCount;
 
   x.domain(data.map(function(d) { return d.label; }));
   y.domain([0, d3.max(data, function(d) { return d.value; })]);
 
   svg.append("text").attr("x", w / 2).attr("y", - margin.top / 2).attr("text-anchor", "middle")
                     .style("text-decoration", "underline").style("font-size", "16px").text(title);
+  svg.append("text").attr("x", w / 2).attr("y", - margin.top / 4).attr("text-anchor", "middle")
+                    .style("text-decoration", "none").style("font-size", "16px").text("Average: " + avg.toFixed(2));
   svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + h + ")").call(xAxis);
-  svg.append("g").attr("class", "y axis").call(yAxis);
+  //svg.append("g").attr("class", "y axis").call(yAxis);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Number of People");
 
   svg.selectAll(".bar").data(data).enter().append("rect")
       .attr("class", "bar").attr("fill", function(d, i) { return color(i); })
